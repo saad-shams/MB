@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mittho Sweets &amp; Bakrs – Custom cakes, made to order</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;600;800&family=Noto+Nastaliq+Urdu:wght@500;700&display=swap">
+<style>
+:root{
+  --blue:#609fb8; --deep:#2c5d72; --navy:#0d2b38; --head:#1d4a5e; --pale:#e8f2f6; --mist:#cfe4ec; --gold:#d9a62e; --gold-soft:#f3dc9a;
+  --pink:#fde6ec; --bg:#fcfeff; --surface:#fff; --ink:#14262e; --muted:#566d77; --line:#d8e7ee; --hdr:#d4e7ef;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f1e25;--surface:#172a33;--ink:#e9f4f8;--muted:#a3bcc6;--line:#2a424d;--pale:#142932;--mist:#1d3b48;--pink:#2a1d27;--hdr:#173340;--head:#cfe4ec}
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "Figtree","Noto Nastaliq Urdu",system-ui,sans-serif;overflow-x:hidden}
+[dir=rtl] body,[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] p,[dir=rtl] a,[dir=rtl] button{font-family:"Noto Nastaliq Urdu","Figtree",sans-serif;line-height:2}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:700;line-height:1.12;margin:0;color:var(--head)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+button{font:inherit;color:inherit;cursor:pointer}
+#bar{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--gold);transform-origin:0 50%;transform:scaleX(0);z-index:60}
+.btn{display:inline-block;background:var(--deep);color:#fff;border:0;border-radius:999px;padding:12px 24px;font:800 15px "Figtree",sans-serif;text-decoration:none;transition:transform .2s,background .2s}
+.btn:hover{background:var(--navy);transform:translateY(-2px)}
+.btn.gold{background:var(--gold);color:#2e1f00}.btn.gold:hover{background:var(--gold-soft)}
+.btn.ghost{background:transparent;color:inherit;border:2px solid currentColor}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--hdr);overflow:visible}
+header.top::before,header.top::after{content:"";position:absolute;top:0;width:260px;height:100%;pointer-events:none}
+header.top::before{left:0;background:radial-gradient(ellipse at 0 0,var(--pink) 55%,transparent 56%)}
+header.top::after{right:0;background:radial-gradient(ellipse at 100% 0,#fff6e0 55%,transparent 56%);opacity:.9}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top::after{opacity:.1}}
+.hrow{position:relative;z-index:1;display:grid;grid-template-columns:1fr minmax(240px,420px) 1fr;align-items:center;gap:16px;padding-top:12px}
+.brand{text-decoration:none;line-height:1.1}
+.brand b{font:700 26px "Fraunces",serif;color:var(--head);display:block}
+.brand small{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.search{position:relative}
+.search input{width:100%;font:inherit;color:#14262e;background:#fff;border:0;border-radius:10px;padding:11px 14px 11px 40px}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:#2c5d72;fill:none;stroke-width:2}
+#sr{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--surface);border-radius:14px;box-shadow:0 20px 40px -16px rgba(13,43,56,.5);display:none;overflow:hidden}
+#sr button{display:block;width:100%;text-align:start;border:0;background:none;padding:11px 16px}
+#sr button:hover{background:var(--pale)}
+.icons{display:flex;justify-content:flex-end;gap:10px;align-items:center}
+.icons a,.lang{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#ffffffa8;text-decoration:none;font-weight:800;font-size:13px;border:0;color:#1d4a5e}
+.icons svg{width:18px;height:18px;stroke:#1d4a5e;fill:none;stroke-width:2}
+.lang{width:auto;padding:0 14px;border-radius:999px}
+.cats{position:relative;z-index:1;display:flex;justify-content:center;gap:26px;overflow-x:auto;padding:12px 24px 12px;font-weight:600;font-size:14.5px;scrollbar-width:none}
+.cats a{text-decoration:none;white-space:nowrap;color:var(--head);padding-bottom:2px;border-bottom:2px solid transparent}
+.cats a:hover,.cats a.on{border-color:var(--head)}
+@media(max-width:760px){.hrow{grid-template-columns:1fr auto}.search{grid-column:1/-1;order:3}.cats{justify-content:flex-start}}
+
+/* hero slider */
+.hero{position:relative;border-radius:0 0 36px 36px;overflow:hidden;background:var(--blue);color:var(--navy);min-height:460px}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .7s,visibility .7s}
+.slide.on{opacity:1;visibility:visible;position:relative}
+.slide .wrap{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;min-height:460px}
+.slide h1{font-size:clamp(34px,5.4vw,66px);color:var(--navy);margin-bottom:12px}
+.slide p{font-size:18px;max-width:26em;margin:0 0 22px}
+.slide .tx>*{opacity:0;transform:translateY(24px)}
+.slide.on .tx>*{opacity:1;transform:none;transition:all .8s cubic-bezier(.2,.8,.2,1) .2s}
+.slide.on .tx>:nth-child(2){transition-delay:.35s}.slide.on .tx>:nth-child(3){transition-delay:.5s}
+.slide .art{display:flex;justify-content:center;align-items:flex-end;position:relative;height:100%;padding-top:24px}
+.slide .art::before{content:"";position:absolute;bottom:0;width:min(440px,92%);aspect-ratio:1;border-radius:50%;background:#ffffff55;transform:translateY(40%)}
+.slide .art svg{position:relative;width:min(420px,92%);transform:translateY(calc(var(--sy,0)*-.05px));filter:drop-shadow(0 26px 24px rgba(13,43,56,.25))}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:38px;height:38px;border-radius:50%;border:0;background:#ffffffc4;color:var(--navy);font-size:18px}
+.arrow.p{left:14px}.arrow.n{right:14px}
+.dots{position:absolute;bottom:16px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:3}
+.dots button{width:26px;height:5px;border-radius:3px;border:0;background:#ffffff80;padding:0;transition:all .3s}
+.dots button.on{background:var(--navy);width:40px}
+@media(max-width:760px){.slide .wrap{grid-template-columns:1fr;padding-bottom:50px}.slide .art{order:-1}.slide .art svg{width:min(250px,68%)}.arrow{display:none}.hero,.slide .wrap{min-height:0}}
+
+section{padding:72px 0}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px}
+h2{font-size:clamp(26px,3.6vw,38px)}
+.sub{color:var(--muted);margin:6px 0 0}
+.band{background:var(--pink)}.bandb{background:var(--pale)}
+
+.rv{opacity:0;transition:opacity .8s,transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.l{transform:translateX(-50px)}.rv.r{transform:translateX(50px)}.rv.u{transform:translateY(36px)}.rv.s{transform:scale(.9)}
+.rv.in{opacity:1;transform:none}
+
+/* collections */
+.cols{display:grid;grid-template-columns:repeat(4,1fr);gap:30px 24px}
+.col{background:none;border:0;padding:0;text-align:center;font:700 16px "Fraunces",serif;color:var(--head)}
+.col .ti{aspect-ratio:1/1.1;border-radius:18px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;margin-bottom:12px;background:var(--b);transition:transform .35s,box-shadow .35s}
+.col:hover .ti{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 36px -18px rgba(13,43,56,.55)}
+.col svg{width:84%;margin-bottom:-4px}
+@media(max-width:760px){.cols{grid-template-columns:1fr 1fr}}
+
+/* rails */
+.ctrl{display:flex;gap:10px}
+.ctrl button{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--head);background:#ffffff80;color:var(--head);font-size:18px}
+.ctrl button:hover{background:var(--head);color:#fff}
+.rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.pc{flex:0 0 min(262px,74%);scroll-snap-align:start;background:var(--surface);border-radius:16px;overflow:hidden;border:1px solid var(--line);text-align:start;padding:0;transition:transform .3s,box-shadow .3s}
+.pc:hover{transform:translateY(-6px);box-shadow:0 22px 36px -20px rgba(13,43,56,.55)}
+.pc .ph{height:230px;background:var(--b);display:flex;align-items:flex-end;justify-content:center;position:relative}
+.pc .ph svg{height:92%}
+.tag{position:absolute;top:10px;right:10px;background:#fff;color:#1d4a5e;font-weight:800;font-size:12px;border-radius:8px;padding:3px 10px}
+.pc .pb{padding:14px 16px 16px}
+.pc h3{font-size:17px;margin-bottom:4px}
+.pc span.s{color:var(--muted);font-size:14px;display:block}
+.pc span.m{display:block;margin-top:8px;font-weight:800;color:var(--deep)}
+
+/* features */
+.f3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;text-align:center}
+.f3 .ic{width:56px;height:56px;border-radius:50%;background:var(--mist);margin:0 auto 12px;display:grid;place-items:center}
+.f3 svg{width:26px;height:26px;stroke:var(--deep);fill:none;stroke-width:1.8}
+.f3 h3{font-size:19px;margin-bottom:4px}.f3 p{margin:0;color:var(--muted);font-size:15px}
+@media(max-width:700px){.f3{grid-template-columns:1fr}}
+
+/* builder */
+.bld .g{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.preview{background:var(--surface);border-radius:28px;padding:26px 22px 10px;position:sticky;top:150px;border:1px solid var(--line)}
+.preview svg{width:100%;max-height:430px;display:block}
+.ctl{display:grid;gap:20px}
+.ctl h3{font:800 12.5px "Figtree",sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted)}
+[dir=rtl] .ctl h3{letter-spacing:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 15px;font-weight:700;transition:all .15s}
+.opts button[aria-pressed=true]{border-color:var(--deep);background:var(--deep);color:#fff}
+.sw{width:42px;height:42px;border-radius:50%!important;border:2px solid var(--line)!important;padding:0!important;background:var(--c)!important}
+.sw[aria-pressed=true]{border-color:var(--gold)!important;box-shadow:0 0 0 3px var(--deep)}
+input.f,select{font:inherit;color:inherit;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;width:100%}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.bld .g{grid-template-columns:1fr}.preview{position:static}}
+.pop .t{animation:drop .55s cubic-bezier(.3,1.4,.5,1) both;animation-delay:calc(var(--i)*.12s)}
+@keyframes drop{from{transform:translateY(-90px);opacity:0}}
+
+/* insta */
+.ig{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ig .it{aspect-ratio:1;border-radius:14px;background:var(--b);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:0;padding:0;transition:transform .3s}
+.ig .it:hover{transform:scale(1.04) rotate(-1deg)}
+.ig svg{width:86%}
+@media(max-width:700px){.ig{grid-template-columns:1fr 1fr}}
+
+footer{background:var(--hdr);color:var(--head);padding:54px 0 26px}
+.fg{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.3fr;gap:30px}
+.fg h4{margin:0 0 12px;font:700 17px "Fraunces",serif}
+.fg a,.fg span{display:block;text-decoration:none;margin-bottom:7px;font-size:14.5px;color:var(--ink)}
+.fg a:hover{text-decoration:underline}
+.soc{display:flex;gap:10px;margin-top:8px}
+.soc b{width:38px;height:38px;border:2px solid var(--head);border-radius:10px;display:grid;place-items:center;font-size:12px;color:var(--head)}
+.copy{text-align:center;margin-top:30px;padding-top:18px;border-top:1px solid #1d4a5e33;font-size:13.5px}
+@media(max-width:760px){.fg{grid-template-columns:1fr 1fr}}
+.dock{display:none}
+@media(max-width:700px){
+  .dock{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line);gap:10px}
+  .dock a{flex:1;text-align:center;padding:12px}body{padding-bottom:76px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}.rv,.slide,.slide .tx>*{opacity:1;transform:none;transition:none}.slide:not(.on){display:none}
+  .pop .t{animation:none}.slide .art svg{transform:none}
+}
+*{-webkit-tap-highlight-color:transparent}a,button{touch-action:manipulation}
+.mbar{display:none}
+#sr{max-height:55vh;overflow-y:auto}
+@media(hover:none){.col:hover .ti,.pc:hover,.ig .it:hover,.btn:hover{transform:none;box-shadow:none}.col:active .ti,.pc:active,.btn:active{transform:scale(.97)}}
+@media(max-width:760px){
+html{scroll-padding-top:70px}
+body{padding-bottom:84px}
+.wrap{padding:0 18px}
+header.top{position:relative}
+header.top::before,header.top::after{width:120px}
+.hrow{padding-top:10px;gap:10px}
+.brand b{font-size:25px}
+.icons a{width:42px;height:42px}.lang{height:42px;padding:0 15px}
+.search input{font-size:16px;padding:13px 14px 13px 42px;border-radius:14px}
+.cats{justify-content:flex-start;gap:8px;padding:10px 18px 14px}
+.cats a{background:#ffffffb3;border-radius:999px;padding:9px 16px;border:0;font-size:14px;color:#1d4a5e}
+.cats a.on{background:var(--head);color:#fff}
+.mbar{display:flex;position:fixed;top:0;left:0;right:0;z-index:55;align-items:center;justify-content:space-between;padding:calc(8px + env(safe-area-inset-top,0px)) 16px 8px;background:var(--hdr);box-shadow:0 8px 20px -14px rgba(13,43,56,.6);transform:translateY(-115%);transition:transform .35s}
+.mbar.show{transform:none}.mbar .brand b{font-size:22px}.mbar .btn{padding:10px 18px;font-size:14px}
+.hero{border-radius:0 0 28px 28px}
+.slide .wrap{grid-template-columns:1fr;gap:0;padding-top:22px;padding-bottom:58px;text-align:center;justify-items:center}
+.slide .art{order:-1;padding-top:6px}
+.slide .art svg{width:min(230px,62vw)}.slide .art::before{width:270px}
+.slide h1{font-size:clamp(30px,9vw,40px);margin:20px 0 10px}
+.slide p{font-size:16px;margin:0 auto 18px}
+.slide .btn{padding:14px 30px;font-size:16px}
+.dots button{height:6px}
+section{padding:46px 0}
+.sh{margin-bottom:20px;align-items:center}
+.ctrl{display:none}
+.cols{gap:22px 14px}.col{font-size:15px}.col .ti{border-radius:20px}
+.rail{margin:0 -18px;padding:6px 18px 18px;scroll-padding:0 18px;gap:14px}
+.pc{flex-basis:78%}.pc .ph{height:210px}
+.bandb{padding:38px 0!important}
+.f3{gap:20px}
+.f3>div{display:grid;grid-template-columns:56px 1fr;column-gap:14px;text-align:start;align-items:center}
+.f3 .ic{grid-row:span 2;margin:0}
+.bld .g{gap:18px}
+.preview{position:sticky;top:62px;z-index:5;padding:10px 10px 2px;border-radius:22px;box-shadow:0 14px 26px -18px rgba(13,43,56,.6)}
+.preview svg{max-height:200px}
+.ctl{gap:22px}
+.opts button{padding:11px 16px;min-height:44px}
+.sw{width:46px;height:46px}
+input.f,select{font-size:16px;padding:13px 14px;min-height:48px}
+#send{width:100%;padding:16px;font-size:17px}
+.ig{gap:10px}.ig .it{border-radius:16px}
+footer{padding:40px 0 100px}
+.fg{grid-template-columns:1fr 1fr;gap:26px 18px}
+.fg>div:first-child,.fg>div:last-child{grid-column:1/-1}
+.dock{display:grid;grid-template-columns:1.3fr 1.2fr 1fr;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));transition:transform .3s;box-shadow:0 -10px 24px -18px rgba(13,43,56,.5)}
+.dock a{display:flex;align-items:center;justify-content:center;padding:13px 6px;font-size:15px}
+body.dock-off .dock{transform:translateY(110%)}
+}
+
+.burger{display:none;width:42px;height:42px;border-radius:50%;border:0;background:#ffffffa8;padding:0;position:relative;flex:none}
+.burger span{position:absolute;left:11px;right:11px;height:2.5px;border-radius:2px;background:#1d4a5e}
+.burger span:nth-child(1){top:14px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:26px}
+.drawer{position:fixed;inset:0;z-index:80;visibility:hidden;pointer-events:none;transition:visibility 0s .4s}
+.drawer.open{visibility:visible;pointer-events:auto;transition:none}
+.dback{position:absolute;inset:0;background:rgba(13,43,56,.55);opacity:0;transition:opacity .3s}
+.drawer.open .dback{opacity:1}
+.dpanel{position:absolute;top:0;right:0;bottom:0;width:min(86vw,360px);background:var(--bg);display:flex;flex-direction:column;padding:calc(16px + env(safe-area-inset-top,0px)) 22px calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(105%);transition:transform .4s cubic-bezier(.2,.8,.2,1);overflow-y:auto}
+.drawer.open .dpanel{transform:none}
+.dtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.dtop .brand b{font-size:26px}
+.dx{width:42px;height:42px;border-radius:50%;border:0;background:var(--pale);font-size:28px;line-height:1}
+#dnav{display:flex;flex-direction:column}
+#dnav a{font:700 26px "Fraunces",serif;color:var(--head);text-decoration:none;padding:15px 0;border-bottom:1px solid var(--line);opacity:0;transform:translateX(26px);transition:opacity .4s,transform .45s cubic-bezier(.2,.8,.2,1)}
+.drawer.open #dnav a{opacity:1;transform:none}
+.drawer.open #dnav a:nth-child(1){transition-delay:.08s}.drawer.open #dnav a:nth-child(2){transition-delay:.13s}.drawer.open #dnav a:nth-child(3){transition-delay:.18s}.drawer.open #dnav a:nth-child(4){transition-delay:.23s}.drawer.open #dnav a:nth-child(5){transition-delay:.28s}.drawer.open #dnav a:nth-child(6){transition-delay:.33s}
+.dfoot{margin-top:auto;padding-top:26px;display:grid;gap:10px}
+.dfoot .btn{text-align:center;padding:15px}
+.dfoot .lang{width:auto;height:46px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+@media(min-width:761px){.drawer{display:none}}
+img{filter:saturate(1.04) contrast(1.02)}
+.frame{width:min(300px,80%);aspect-ratio:4/5;border:6px solid var(--gold);border-radius:200px 200px 22px 22px;overflow:hidden;background:var(--mist);position:relative;box-shadow:0 26px 40px -18px rgba(13,43,56,.55);transform:translateY(calc(var(--sy,0)*-.05px))}
+.frame img{width:100%;height:100%;object-fit:cover;display:block}
+.ti img,.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.col:hover .ti img,.pc:hover .ph img{transform:scale(1.07)}
+.pc .ph{overflow:hidden}
+.bento{display:grid;grid-template-columns:1.1fr 1fr 1fr;grid-template-rows:260px 260px;gap:16px}
+.bi{margin:0;position:relative;border-radius:22px;overflow:hidden;background:var(--mist)}
+.bi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.bi:hover img{transform:scale(1.05)}
+.bi.a{grid-row:span 2}.bi.d{grid-column:span 2}
+.bi figcaption{position:absolute;left:0;right:0;bottom:0;padding:36px 16px 14px;color:#fff;font:700 16px "Fraunces",serif;background:linear-gradient(transparent,rgba(8,28,38,.75))}
+.gal{columns:4;column-gap:14px}
+.gi{display:block;width:100%;break-inside:avoid;margin:0 0 14px;padding:0;border:0;border-radius:18px;overflow:hidden;background:var(--mist);cursor:zoom-in}
+.gi img{width:100%;height:auto;display:block;transition:transform .5s}
+.gi:hover img{transform:scale(1.05)}
+.lb{position:fixed;inset:0;z-index:90;background:rgba(6,22,30,.95);display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:76vh;border-radius:14px;object-fit:contain;filter:none}
+.lb p{color:#cfe4ec;margin:14px 0 0;text-align:center;font-size:15px;max-width:30em}
+.lbx,.lbar{position:absolute;border:0;border-radius:50%;background:#ffffff26;color:#fff;width:44px;height:44px;font-size:28px;line-height:1}
+.lbx{top:calc(14px + env(safe-area-inset-top,0px));right:14px}
+.lbar{top:50%;transform:translateY(-50%)}.lbar.p{left:14px}.lbar.n{right:14px}
+@media(max-width:900px){.gal{columns:3}}
+@media(max-width:760px){
+.burger{display:block}.cats{display:none}.icons a:last-of-type{display:none}
+.hrow{padding-bottom:14px}
+.mbar .btn{margin-inline-start:auto;margin-inline-end:10px}
+.gal{columns:2;column-gap:10px}.gi{margin-bottom:10px;border-radius:14px}
+.bento{grid-template-columns:1fr 1fr;grid-template-rows:230px 170px 210px;gap:10px}.bi.a{grid-row:auto;grid-column:span 2}.bi{border-radius:18px}
+.lbar{top:auto;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:none}
+.slide .art{padding-top:10px}.frame{width:min(236px,64vw)}
+}
+.lz{opacity:0;transition:opacity .7s}.lz.ld{opacity:1}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header class="top">
+  <div class="wrap hrow">
+    <a class="brand" href="#top"><b>Mittho</b><small>Sweets &amp; Bakrs</small></a>
+    <div class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="q" type="search" placeholder="Search cakes" aria-label="Search cakes" autocomplete="off">
+      <div id="sr" role="listbox"></div>
+    </div>
+    <div class="icons">
+      <button class="lang" id="lang" type="button" aria-label="Switch language">اردو</button>
+      <a href="tel:+923286220006" aria-label="Call us"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a>
+      <a href="https://wa.me/923286220006" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.5 19z"/></svg></a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="cats" aria-label="Main">
+    <a href="#collections" data-ur="کیکس">Cakes</a><a href="#popular" data-ur="مقبول ڈیزائن">Themes</a><a href="#build" data-ur="اپنا کیک ڈیزائن کریں">Design your cake</a><a href="#counter">Sweets</a><a href="#follow">Gallery</a><a href="#contact" data-ur="رابطہ">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+<div class="hero" id="hero" aria-roledescription="carousel">
+  <button class="arrow p" id="hp" aria-label="Previous slide">&#8249;</button>
+  <button class="arrow n" id="hn" aria-label="Next slide">&#8250;</button>
+  <div class="dots" id="dots"></div>
+</div>
+
+<section id="collections">
+  <div class="wrap">
+    <div class="sh rv l"><div><h2 data-ur="ہمارے مقبول کیک">Discover our cake collections</h2><p class="sub">Pick a style to open it in the designer.</p></div></div>
+    <div class="cols" id="cols"></div>
+  </div>
+</section>
+
+<section class="band" id="popular">
+  <div class="wrap">
+    <div class="sh rv l"><div><h2 data-ur="مقبول ڈیزائن">Popular designs</h2><p class="sub">Every cake is made to order. Tap one to make it yours.</p></div><div class="ctrl"><button data-r="r1" data-d="-1" aria-label="Previous">&#8592;</button><button data-r="r1" data-d="1" aria-label="Next">&#8594;</button></div></div>
+    <div class="rail rv u" id="r1"></div>
+  </div>
+</section>
+
+<section class="bandb" style="padding:56px 0">
+  <div class="wrap f3">
+    <div class="rv u"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20 20 4M5 5l4 1 1 4M19 19l-4-1-1-4"/></svg></div><h3 data-ur="آرڈر پر تیار">Made to order</h3><p>Your colours, size and design, baked for your day.</p></div>
+    <div class="rv u" style="transition-delay:.12s"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h16"/></svg></div><h3 data-ur="اردو اور انگریزی تحریر">Urdu &amp; English lettering</h3><p>Names and messages written in the language you choose.</p></div>
+    <div class="rv u" style="transition-delay:.24s"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.5 19z"/></svg></div><h3 data-ur="آسان آن لائن آرڈر">Easy online ordering</h3><p>Design it here, send it on WhatsApp, and we confirm the details.</p></div>
+  </div>
+</section>
+
+<section class="bld" id="build">
+  <div class="wrap g">
+    <div class="preview rv l"><div id="live" class="pop"></div></div>
+    <div class="ctl rv r">
+      <div><h2 data-ur="اپنا کیک ڈیزائن کریں">Design your cake</h2><p class="sub">Change anything and the cake updates. Then send it to us.</p></div>
+      <div><h3>Frosting colour</h3><div class="opts" id="o-col"></div></div>
+      <div><h3>Tiers</h3><div class="opts" id="o-tier"></div></div>
+      <div><h3>Topper</h3><div class="opts" id="o-top"></div></div>
+      <div><h3>Message on the cake</h3><input class="f" id="msg" maxlength="22" value="HBD Sawera" aria-label="Message on the cake"></div>
+      <div class="two">
+        <div><h3>Flavour</h3><select id="flv"><option>Vanilla</option><option>Chocolate</option><option>Strawberry</option><option>Pineapple</option><option>Mixed</option></select></div>
+        <div><h3>Size</h3><select id="siz"><option>1 lb</option><option selected>2 lb</option><option>3 lb</option><option>4 lb</option><option>5 lb or more</option></select></div>
+      </div>
+      <div><h3>Needed on</h3><input class="f" type="date" id="dt"></div>
+      <button class="btn gold" id="send" type="button">Send my design on WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<section class="bandb" id="counter">
+  <div class="wrap">
+    <div class="sh rv l"><div><h2>Sweets, mithai &amp; our counter</h2><p class="sub">Sweets and bakery items from our shop. Message us to ask what is ready today.</p></div><a class="btn" href="https://wa.me/923286220006">Ask on WhatsApp</a></div>
+    <div class="bento">
+      <figure class="bi a rv l" data-k="sweets"><figcaption>Mithai counter</figcaption></figure>
+      <figure class="bi rv u" data-k="halwa"><figcaption>Walnut sweet</figcaption></figure>
+      <figure class="bi rv u" data-k="choc"><figcaption>Chocolate cake</figcaption></figure>
+      <figure class="bi d rv r" data-k="shop"><figcaption>Visit our shop</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="follow">
+  <div class="wrap">
+    <div class="sh rv l" style="justify-content:center;text-align:center"><div><h2>Our cakes</h2><p class="sub">Real cakes from Mittho Sweets &amp; Bakrs. Tap a photo to view it. Find us on TikTok and Facebook for more.</p></div></div>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="fg">
+      <div><h4 style="font-size:24px">Mittho Sweets &amp; Bakrs</h4><span style="font-family:'Noto Nastaliq Urdu',serif;font-size:20px;line-height:2">مٹھو سویٹس اینڈ بیکرز</span><span>Cakes, sweets and bakery items, made fresh.</span></div>
+      <div><h4>Quick links</h4><a href="#collections">Collections</a><a href="#popular">Popular designs</a><a href="#build">Design your cake</a><a href="#counter">Sweets</a><a href="#follow">Gallery</a></div>
+      <div><h4>Contact</h4><a href="tel:+923286220006">0328 6220006</a><a href="https://wa.me/923286220006">WhatsApp</a><span>Online orders: call or message</span></div>
+      <div><h4>Order today</h4><a class="btn gold" href="#build" style="color:#2e1f00;display:inline-block;margin-bottom:12px">Design your cake</a><div class="soc"><b title="TikTok">TT</b><b title="Facebook">f</b></div></div>
+    </div>
+    <div class="copy">© <span id="y">2026</span> Mittho Sweets &amp; Bakrs. All rights reserved.</div>
+  </div>
+</footer>
+<div class="mbar" id="mbar"><a class="brand" href="#top"><b>Mittho</b></a><a class="btn" href="#build">Design your cake</a><button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button></div>
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="dback" id="dback"></div>
+  <aside class="dpanel" role="dialog" aria-label="Menu">
+    <div class="dtop"><span class="brand"><b>Mittho</b><small>Sweets &amp; Bakrs</small></span><button class="dx" id="dx" type="button" aria-label="Close menu">&times;</button></div>
+    <nav id="dnav" aria-label="Menu"></nav>
+    <div class="dfoot"><a class="btn gold" href="https://wa.me/923286220006">Order on WhatsApp</a><a class="btn ghost" href="tel:+923286220006">Call 0328 6220006</a><button class="lang" id="dlang" type="button">اردو</button></div>
+  </aside>
+</div>
+<div class="lb" id="lb" role="dialog" aria-label="Photo viewer"><button class="lbx" id="lbx" type="button" aria-label="Close">&times;</button><button class="lbar p" id="lbp" type="button" aria-label="Previous photo">&#8249;</button><img id="lbi" alt=""><button class="lbar n" id="lbn" type="button" aria-label="Next photo">&#8250;</button><p id="lbc"></p></div>
+<div class="dock"><a class="btn gold" href="#build">Design</a><a class="btn" href="https://wa.me/923286220006">WhatsApp</a><a class="btn ghost" href="tel:+923286220006">Call</a></div>
+
+<script>var IMG={"mehndi": "/_blob/0bdec22de39598beba81d785f3ef0ea9", "mom": "/_blob/8011f37f49b2c62c5463433a30c03340", "doctor": "/_blob/4e95bc05d5ed7f5e3101ab2cdc92fb74", "teddy": "/_blob/fabf502d5e8ef846dc8eda49964ef705", "heart": "/_blob/99e43ce6611b6bde4bce9d9132018dfc", "gym": "/_blob/e0ec3fa45c6fb777e6c37d3ab5a56808", "badminton": "/_blob/d155614e5af509792a18ed4f11b29d39", "n97": "/_blob/a8d63ae45de4c283a21ffd76a86fc326", "choc": "/_blob/02593d6be77c372fbccea192a2ca774b", "sweets": "/_blob/85dd8e492a3c274669f50e6f60e36b27", "halwa": "/_blob/708ee02728f84a1c4f757b4794db1609", "shop": "/_blob/57e69f6d383667278987e3f4624af64f"};var DIM={"sweets": [600, 1003], "teddy": [600, 1003], "badminton": [600, 1003], "n97": [600, 603], "shop": [600, 1003], "doctor": [600, 752], "choc": [600, 1003], "halwa": [600, 1003], "gym": [600, 603], "mehndi": [600, 1003], "mom": [600, 752], "heart": [600, 603]};</script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var COLS=[{n:'White',b:'#ffffff',d:'#609fb8',k:'#14262e'},{n:'Sky blue',b:'#9cc9db',d:'#ffffff',k:'#14262e'},{n:'Pink',b:'#f6c6d3',d:'#e86a92',k:'#14262e'},{n:'Yellow',b:'#f2d66b',d:'#6fae4b',k:'#14262e'},{n:'Chocolate',b:'#6b4331',d:'#d9a62e',k:'#ffffff'}];
+var TOPS=['Rose','Heart','Candles','Butterfly','None'];
+var S={c:0,t:1,p:'Rose',m:'HBD Sawera'};
+function topper(p,y){
+  var g='';
+  if(p=='Rose')g='<circle cx="130" cy="'+(y-12)+'" r="15" fill="#c4132b"/><circle cx="130" cy="'+(y-12)+'" r="9" fill="#9d0e22"/><circle cx="130" cy="'+(y-12)+'" r="3.5" fill="#c4132b"/><path d="M114 '+(y-4)+'c-12 2-18 10-16 17 9-1 15-6 16-17z" fill="#2f6b3a"/>';
+  if(p=='Heart')g='<rect x="129" y="'+(y-40)+'" width="3" height="40" fill="#d9a62e"/><path d="M130 '+(y-34)+'c-14-14-34 2-18 16l18 14 18-14c16-14-4-30-18-16z" fill="#e63e5f"/>';
+  if(p=='Candles')g=[100,130,160].map(function(x,i){return '<rect x="'+(x-3)+'" y="'+(y-30)+'" width="6" height="30" rx="2" fill="'+['#609fb8','#e86a92','#f2d66b'][i]+'"/><path d="M'+x+' '+(y-48)+'c7 8 5 14 0 16-5-2-7-8 0-16z" fill="#f59e0b"/>'}).join('');
+  if(p=='Butterfly')g='<rect x="129" y="'+(y-30)+'" width="2" height="30" fill="#d9a62e"/><ellipse cx="116" cy="'+(y-40)+'" rx="14" ry="10" fill="#609fb8" transform="rotate(-25 116 '+(y-40)+')"/><ellipse cx="144" cy="'+(y-40)+'" rx="14" ry="10" fill="#8cc0d6" transform="rotate(25 144 '+(y-40)+')"/><rect x="128" y="'+(y-48)+'" width="4" height="16" rx="2" fill="#14262e"/>';
+  return g;
+}
+function cake(s){
+  var C=COLS[s.c],W=[210,150,98],H=[68,58,50],y=224,o='<ellipse cx="130" cy="230" rx="122" ry="10" fill="#000" opacity=".12"/>',top=y,i,x,w,k,h,msgY=0,msgW=0;
+  if(s.v=='num'){
+    o+='<g class="t" style="--i:0"><text x="130" y="214" text-anchor="middle" font-size="230" font-family="Fraunces,serif" font-weight="700" fill="'+C.b+'" stroke="'+C.d+'" stroke-width="9" paint-order="stroke">'+(s.n||'1')+'</text></g>';
+    return '<svg viewBox="0 0 260 240" role="img" aria-label="Number cake">'+o+topper(s.p,62)+'</svg>';
+  }
+  var n=s.v=='sheet'?1:s.t;
+  for(i=0;i<n;i++){
+    w=s.v=='sheet'?240:W[i];h=s.v=='sheet'?58:H[i];x=130-w/2;y-=h;top=y;
+    o+='<g class="t" style="--i:'+(n-1-i)+'"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="10" fill="'+C.b+'" stroke="rgba(0,0,0,.08)"/><rect x="'+x+'" y="'+y+'" width="'+w+'" height="12" rx="6" fill="'+C.d+'"/>';
+    for(k=0;x+10+k*24<x+w-10;k++)o+='<rect x="'+(x+10+k*24)+'" y="'+(y+6)+'" width="11" height="'+(10+(k%3)*8)+'" rx="5.5" fill="'+C.d+'"/>';
+    o+='</g>';
+    if(i==0){msgY=y+h/2+14;msgW=w-30}
+  }
+  var m=(s.m||'').trim(),fs=m?Math.min(20,msgW/(m.length*.62)):0;
+  if(m)o+='<text x="130" y="'+msgY+'" text-anchor="middle" font-size="'+fs+'" font-weight="800" fill="'+C.k+'" font-family="Figtree,Noto Nastaliq Urdu,sans-serif">'+m.replace(/[<&>]/g,'')+'</text>';
+  return '<svg viewBox="0 0 260 240" role="img" aria-label="Cake">'+o+topper(s.p,top)+'</svg>';
+}
+
+/* photos */
+var ALT={heart:'Red and white heart cake with a happy anniversary message',mom:'Pink and white Best Mom Ever cake with roses and an Urdu card',mehndi:'Yellow mehndi cake with a dhol topper',gym:'Gym themed birthday cake with a protein tub and dumbbells',halwa:'Walnut and almond sweet in a tray',choc:'Chocolate cake with chocolate shards and cherries',doctor:'Doctor themed birthday cake with a stethoscope',shop:'Inside the Mittho shop with a cake on the counter',n97:'Large 97 sheet cake',badminton:'Badminton racket cake with a shuttlecock',teddy:'Blue teddy bear cake with a ladder and clouds',sweets:'Display case full of sweets'};
+var FOC={heart:'50% 62%',mom:'50% 58%',mehndi:'50% 60%',gym:'50% 55%',halwa:'50% 35%',choc:'50% 55%',doctor:'50% 40%',shop:'50% 60%',n97:'50% 60%',badminton:'50% 62%',teddy:'45% 62%',sweets:'50% 50%'};
+function pic(k,e){var d=DIM[k];return '<img class="lz" '+(e==2?'data-src="':'src="')+IMG[k]+'" width="'+d[0]+'" height="'+d[1]+'" alt="'+ALT[k]+'"'+(e?'':' loading="lazy"')+' decoding="async" onload="this.classList.add(\'ld\')" style="object-position:'+FOC[k]+'">'}
+var COLL=[
+ {t:'Birthday cakes',k:'gym',s:{c:4,t:2,p:'Candles',m:'Happy Birthday'}},
+ {t:'Kids cakes',k:'teddy',s:{c:1,t:1,p:'Butterfly',m:'Welcome Baby'}},
+ {t:'Party cakes',k:'n97',s:{c:0,v:'sheet',p:'None',m:'Party Time'}},
+ {t:'Mehndi cakes',k:'mehndi',s:{c:3,t:2,p:'Butterfly',m:'Mehndi Mubarak'}},
+ {t:'Anniversary cakes',k:'heart',s:{c:2,t:1,p:'Heart',m:'Happy Anniversary'}},
+ {t:'Chocolate cakes',k:'choc',s:{c:4,t:1,p:'None',m:'Happy Birthday'}},
+ {t:'Mama cakes',k:'mom',s:{c:2,t:1,p:'Heart',m:'HBD Mama'}},
+ {t:'Sweets & mithai',k:'sweets',to:'#counter'}
+];
+var POP=[
+ {t:'Sports theme cake',d:'Your hobby on top, the name on the board',k:'badminton',s:{c:4,t:1,p:'None',m:'HBD Hassan'}},
+ {t:'Profession cake',d:'Doctor, teacher, engineer: made to match',k:'doctor',s:{c:0,t:1,p:'None',m:'Happy Birthday Dr.'}},
+ {t:'Gym lover cake',d:'Dumbbells, protein tub and a bold message',k:'gym',s:{c:4,t:2,p:'Candles',m:'Happy Birthday'}},
+ {t:'Mehndi dhol cake',d:'Yellow and green with a dhol topper',k:'mehndi',s:{c:3,t:2,p:'Butterfly',m:'Mehndi Mubarak'}},
+ {t:'Teddy & clouds cake',d:'Soft blues for baby and kids',k:'teddy',s:{c:1,t:1,p:'Butterfly',m:'Welcome Baby'}}
+];
+var GAL=['heart','mom','mehndi','gym','doctor','badminton','teddy','n97','choc'];
+
+/* hero slides */
+var SL=[
+ {bg:'#609fb8',k:'mehndi',h:'Make their day, wherever they are.',u:'ان کا دن خاص بنائیں۔',p:'Personalised cakes from Mittho Sweets & Bakrs.',cta:'Shop the collection',href:'#collections'},
+ {bg:'#efbfcd',k:'mom',h:'Their name, in Urdu or English.',u:'ان کا نام، اردو یا انگریزی میں۔',p:'Your message written on the cake, exactly how you want it.',cta:'Try the designer',href:'#build'},
+ {bg:'#f3dc9a',k:'doctor',h:'Any theme you can imagine.',u:'جو تھیم آپ چاہیں۔',p:'From stethoscopes to dumbbells, we make it to match.',cta:'Design your cake',href:'#build'},
+ {bg:'#8fc3d8',k:'teddy',h:'Order online in minutes.',u:'منٹوں میں آن لائن آرڈر کریں۔',p:'Send your design on WhatsApp and we confirm the details.',cta:'Chat on WhatsApp',href:'https://wa.me/923286220006'}
+];
+var hero=$('hero'),dots=$('dots'),cur=0,timer,ur=false;
+SL.forEach(function(s,i){
+  var d=document.createElement('div');d.className='slide'+(i?'':' on');d.style.background=s.bg;
+  d.innerHTML='<div class="wrap"><div class="tx"><h1></h1><p>'+s.p+'</p><a class="btn" href="'+s.href+'">'+s.cta+'</a></div><div class="art"><div class="frame">'+pic(s.k,i?2:1)+'</div></div></div>';
+  d.querySelector('h1').textContent=s.h;hero.insertBefore(d,$('hp'));
+  var b=document.createElement('button');b.setAttribute('aria-label','Slide '+(i+1));if(!i)b.className='on';b.onclick=function(){go(i,1)};dots.appendChild(b);
+});
+var slides=hero.querySelectorAll('.slide');
+function go(i,manual){
+  cur=(i+slides.length)%slides.length;
+  [].forEach.call(slides,function(s,k){s.classList.toggle('on',k==cur)});
+  [].forEach.call(dots.children,function(b,k){b.classList.toggle('on',k==cur)});
+  if(manual)auto();
+}
+function auto(){clearInterval(timer);if(!matchMedia('(prefers-reduced-motion:reduce)').matches)timer=setInterval(function(){go(cur+1)},5500)}
+$('hp').onclick=function(){go(cur-1,1)};$('hn').onclick=function(){go(cur+1,1)};
+hero.onmouseenter=function(){clearInterval(timer)};hero.onmouseleave=auto;auto();
+
+/* builder */
+addEventListener('load',function(){setTimeout(function(){[].forEach.call(document.querySelectorAll('img[data-src]'),function(m){m.src=m.dataset.src;m.removeAttribute('data-src')})},700)});
+var live=$('live');
+function draw(){live.classList.remove('pop');void live.offsetWidth;live.innerHTML=cake(S);live.classList.add('pop')}
+function pressed(box,fn){[].forEach.call(box.children,function(b,i){b.setAttribute('aria-pressed',fn(b,i))})}
+function sync(){
+  pressed($('o-col'),function(b,i){return i==S.c});
+  pressed($('o-tier'),function(b,i){return i+1==S.t});
+  pressed($('o-top'),function(b,i){return TOPS[i]==S.p});
+  $('msg').value=S.m||'';draw();
+}
+function load(s){S={c:s.c,t:s.t||1,p:s.p,m:s.m||'',v:s.v,n:s.n};sync();$('build').scrollIntoView()}
+COLS.forEach(function(c,i){var b=document.createElement('button');b.className='sw';b.style.setProperty('--c',c.b);b.setAttribute('aria-label',c.n);b.title=c.n;b.onclick=function(){S.c=i;sync()};$('o-col').appendChild(b)});
+[1,2,3].forEach(function(n){var b=document.createElement('button');b.textContent=n+(n>1?' tiers':' tier');b.onclick=function(){S.t=n;S.v=0;sync()};$('o-tier').appendChild(b)});
+TOPS.forEach(function(p){var b=document.createElement('button');b.textContent=p;b.onclick=function(){S.p=p;sync()};$('o-top').appendChild(b)});
+$('msg').oninput=function(e){S.m=e.target.value;live.innerHTML=cake(S)};
+$('send').onclick=function(){
+  var l=['Assalam o Alaikum, I would like to order a cake from Mittho Sweets & Bakrs.','Frosting: '+COLS[S.c].n,'Tiers: '+S.t,'Topper: '+S.p,'Message: '+(S.m||'none'),'Flavour: '+$('flv').value,'Size: '+$('siz').value];
+  if($('dt').value)l.push('Needed on: '+$('dt').value);
+  window.open('https://wa.me/923286220006?text='+encodeURIComponent(l.join('\n')),'_blank');
+};
+$('dt').min=new Date().toISOString().slice(0,10);
+
+/* collections, rail, gallery */
+COLL.forEach(function(c){
+  var b=document.createElement('button');b.className='col rv s';b.type='button';
+  b.innerHTML='<div class="ti">'+pic(c.k)+'</div>'+c.t;
+  b.onclick=function(){c.to?document.querySelector(c.to).scrollIntoView():load(c.s)};$('cols').appendChild(b);
+});
+POP.forEach(function(c){
+  var b=document.createElement('button');b.className='pc';b.type='button';
+  b.innerHTML='<div class="ph">'+pic(c.k)+'<span class="tag">Made to order</span></div><div class="pb"><h3>'+c.t+'</h3><span class="s">'+c.d+'</span><span class="m">Make it mine</span></div>';
+  b.onclick=function(){load(c.s)};$('r1').appendChild(b)});
+[].forEach.call(document.querySelectorAll('.ctrl button'),function(b){b.onclick=function(){$(b.dataset.r).scrollBy({left:b.dataset.d*290,behavior:'smooth'})}});
+[].forEach.call(document.querySelectorAll('[data-k]'),function(f){f.insertAdjacentHTML('afterbegin',pic(f.dataset.k))});
+GAL.forEach(function(k,i){var b=document.createElement('button');b.className='gi rv s';b.type='button';b.setAttribute('aria-label','View photo: '+ALT[k]);b.style.transitionDelay=(i%3)*.08+'s';b.innerHTML=pic(k);b.onclick=function(){openLB(i)};$('gal').appendChild(b)});
+
+/* lightbox */
+var lb=$('lb'),li=0,lx=0;
+function showLB(){$('lbi').src=IMG[GAL[li]];$('lbi').alt=ALT[GAL[li]];$('lbc').textContent=ALT[GAL[li]]}
+function openLB(i){li=i;showLB();lb.classList.add('open');document.body.style.overflow='hidden'}
+function closeLB(){lb.classList.remove('open');if(!dr.classList.contains('open'))document.body.style.overflow=''}
+function stepLB(d){li=(li+GAL.length+d)%GAL.length;showLB()}
+$('lbx').onclick=closeLB;$('lbp').onclick=function(){stepLB(-1)};$('lbn').onclick=function(){stepLB(1)};
+lb.onclick=function(e){if(e.target==lb)closeLB()};
+lb.addEventListener('touchstart',function(e){lx=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-lx;if(Math.abs(d)>50)stepLB(d<0?1:-1)});
+
+/* mobile menu drawer */
+var dr=$('drawer'),dn=$('dnav'),bgs=document.querySelectorAll('.burger');
+[].forEach.call(document.querySelectorAll('.cats a'),function(a){var l=a.cloneNode(true);l.className='';dn.appendChild(l)});
+function setDrawer(o){dr.classList.toggle('open',o);dr.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':'';[].forEach.call(bgs,function(b){b.setAttribute('aria-expanded',o)});if(o)$('dx').focus()}
+function closeDrawer(){if(dr.classList.contains('open'))setDrawer(false)}
+[].forEach.call(bgs,function(b){b.onclick=function(){setDrawer(true)}});
+$('dx').onclick=closeDrawer;$('dback').onclick=closeDrawer;
+dn.onclick=function(e){if(e.target.closest('a'))closeDrawer()};
+$('dlang').onclick=function(){$('lang').click()};
+addEventListener('keydown',function(e){if(e.key=='Escape'){closeLB();closeDrawer()}if(lb.classList.contains('open')){if(e.key=='ArrowLeft')stepLB(-1);if(e.key=='ArrowRight')stepLB(1)}});
+addEventListener('resize',function(){if(innerWidth>760)closeDrawer()});
+
+/* search */
+var ALL=COLL.filter(function(c){return c.s}).concat(POP),q=$('q'),sr=$('sr');
+q.oninput=function(){
+  var v=q.value.trim().toLowerCase();sr.innerHTML='';
+  if(!v){sr.style.display='none';return}
+  var hits=ALL.filter(function(c){return c.t.toLowerCase().indexOf(v)>-1}).slice(0,6);
+  if(!hits.length){sr.innerHTML='<button type="button">No match. Try the designer or WhatsApp us.</button>';sr.firstChild.onclick=function(){sr.style.display='none';$('build').scrollIntoView()}}
+  hits.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c.t;b.onclick=function(){sr.style.display='none';q.value='';load(c.s)};sr.appendChild(b)});
+  sr.style.display='block';
+};
+document.addEventListener('click',function(e){if(!e.target.closest('.search'))sr.style.display='none'});
+
+/* language */
+var tr=[].slice.call(document.querySelectorAll('[data-ur]'));tr.forEach(function(el){el.dataset.en=el.innerHTML});
+$('lang').onclick=function(){
+  ur=!ur;var h=document.documentElement;h.lang=ur?'ur':'en';h.dir=ur?'rtl':'ltr';this.textContent=$('dlang').textContent=ur?'EN':'اردو';
+  tr.forEach(function(el){el.innerHTML=ur?el.dataset.ur:el.dataset.en});
+  [].forEach.call(slides,function(s,i){s.querySelector('h1').textContent=ur?SL[i].u:SL[i].h});
+};
+
+/* scroll effects */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+[].forEach.call(document.querySelectorAll('.rv'),function(el){io.observe(el)});
+var bar=$('bar'),tick=false,links=[].slice.call(document.querySelectorAll('.cats a')),secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+function onScroll(){
+  var y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+  bar.style.transform='scaleX('+(h>0?y/h:0)+')';
+  document.documentElement.style.setProperty('--sy',Math.min(y,700));
+  secs.forEach(function(s,i){var b=s.getBoundingClientRect();links[i].classList.toggle('on',b.top<innerHeight*.4&&b.bottom>innerHeight*.4)});
+  tick=false;
+}
+addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});
+var mb=$('mbar'),hs=0;
+addEventListener('scroll',function(){mb.classList.toggle('show',scrollY>260)},{passive:true});
+hero.addEventListener('touchstart',function(e){hs=e.touches[0].clientX},{passive:true});
+hero.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-hs;if(Math.abs(d)>45)go(cur+(d<0?1:-1),1)});
+new IntersectionObserver(function(es){document.body.classList.toggle('dock-off',es[0].isIntersecting)},{threshold:.15}).observe($('build'));
+onScroll();$('y').textContent=new Date().getFullYear();sync();
+})();
+</script>
+</body>
+</html>
